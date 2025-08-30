@@ -33,9 +33,17 @@ class ViewController: UIViewController {
         countries.append("uk")
         countries.append("us")
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Check Score", style: .plain, target: self, action: #selector(checkScore))
         askQuestion()
     }
 
+    @objc func checkScore(){
+        
+        let vc = UIAlertController(title: "Your score is \(playerScore)", message: nil, preferredStyle: .alert)
+        vc.addAction(UIAlertAction(title: "Close", style: .default))
+        present(vc, animated: true)
+    }
+    
     func askQuestion(action : UIAlertAction! = nil) {
         
         if(questionsAsked == 10){
@@ -51,7 +59,7 @@ class ViewController: UIViewController {
         button3.setImage(UIImage(named: countries[2]), for: .normal)
         button3.layer.borderWidth = 1
         
-        title = "Score: \(playerScore) Flag to guess : \(countries[correctAnswer].uppercased())"
+        title = " Flag to guess : \(countries[correctAnswer].uppercased())"
         
         button1.layer.borderColor = UIColor.lightGray.cgColor
         button2.layer.borderColor = UIColor.lightGray.cgColor

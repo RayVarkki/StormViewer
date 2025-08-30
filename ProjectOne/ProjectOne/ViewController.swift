@@ -13,7 +13,6 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
         let fm = FileManager.default
@@ -27,7 +26,13 @@ class ViewController: UITableViewController {
                 pictures.append(item)
             }
         }
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(reccomendToOthers))
+    }
+    
+    @objc func reccomendToOthers(){
+        let vc = UIAlertController(title: "This App Rocks!", message: "Share it with others!", preferredStyle: .alert)
+        vc.addAction(UIAlertAction(title: "Return", style: .default))
+        present(vc, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
