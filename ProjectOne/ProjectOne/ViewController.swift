@@ -17,13 +17,15 @@ class ViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
-        let items = try! fm.contentsOfDirectory(atPath: path)
-        print(items)
-        
-        for item in items {
-            if item.hasPrefix("nssl"){
-                //This is a picture to load
-                pictures.append(item)
+        //project 9 adds async
+        DispatchQueue.global(qos: .userInitiated).async{
+            [weak self] in
+            let items = try! fm.contentsOfDirectory(atPath: path)
+            for item in items {
+                if item.hasPrefix("nssl"){
+                    //This is a picture to load
+                    self?.pictures.append(item)
+                }
             }
         }
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(reccomendToOthers))
