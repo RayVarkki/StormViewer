@@ -1,0 +1,51 @@
+apple-fruit that keeps the doctor away
+banana-long yellow fruit
+dog-common household pet
+cat-animal that says meow
+sun-star that lights our day
+moon-earth's natural satellite
+car-vehicle with four wheels
+bus-large vehicle that carries people
+chair-something you sit on
+table-furniture used for eating or working
+book-something you read
+pen-tool used for writing
+shoe-worn on your foot
+hat-something you wear on your head
+milk-white drink from cows
+water-liquid essential for life
+tree-plant with a trunk and branches
+fish-animal that swims in water
+bird-animal that can fly
+house-building where people live
+door-part of a house you open and close
+ball-round object used in sports
+cake-sweet baked dessert
+egg-food that comes from chickens
+school-place where children learn
+teacher-person who teaches
+river-large stream of water
+mountain-very tall hill
+train-vehicle that runs on tracks
+phone-device used to call someone
+computer-machine used to run programs
+bed-furniture you sleep on
+shirt-clothing worn on your upper body
+pants-clothing worn on your legs
+ice-cold frozen water
+sand-found on a beach
+star-bright light in the night sky
+milkshake-sweet drink made with ice cream
+cookie-sweet baked snack
+clock-device that tells time
+kite-toy that flies in the wind
+toy-something children play with
+rain-water falling from clouds
+snow-frozen white flakes from the sky
+duck-bird that swims in ponds
+cow-animal that gives milk
+horse-animal that people ride
+zoo-place where animals are kept
+park-outdoor place for fun and play
+city-large town
+road-path for cars to drive on
