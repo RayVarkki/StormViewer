@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UICollectionViewController {
     
     var pictures = [String]();
 
