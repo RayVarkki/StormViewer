@@ -18,7 +18,7 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Game", style: .done, target: self, action: #selector(startGame))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "New Game", style: .done, target: self, action: #selector(newGame))
         
         if let startWordsUrl = Bundle.main.url(forResource: "start", withExtension: "txt"){
             if let startWords = try? String(contentsOf: startWordsUrl, encoding: .ascii){
@@ -34,8 +34,24 @@ class ViewController: UITableViewController {
     }
 
     @objc func startGame(){
+        let userDefaults = UserDefaults.standard
+        if userDefaults.string(forKey: "savedWord") != nil{
+            title = userDefaults.string(forKey: "savedWord")
+        }else{
+            title = allWords.randomElement()
+            userDefaults.set(title, forKey: "savedWord")
+        }
+        usedWords = userDefaults.array(forKey: "usedWords") as? [String] ?? []
+        tableView.reloadData()
+    }
+    
+    @objc func newGame(){
+        
+        let userDefaults = UserDefaults.standard
         title = allWords.randomElement()
+        userDefaults.set(title, forKey: "savedWord")
         usedWords.removeAll(keepingCapacity: true)
+        userDefaults.set([], forKey: "usedWords")
         tableView.reloadData()
     }
     
@@ -72,6 +88,8 @@ class ViewController: UITableViewController {
             if isOriginal(word: lowerAnswer){
                 if isReal(word: lowerAnswer){
                     usedWords.insert(lowerAnswer, at: 0)
+                    let userDefaults = UserDefaults.standard
+                    userDefaults.set(usedWords, forKey: "usedWords")
                     
                     let indexPath = IndexPath(row: 0, section: 0)
                     tableView.insertRows(at: [indexPath], with: .automatic)

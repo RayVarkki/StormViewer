@@ -32,7 +32,8 @@ class ViewController: UIViewController {
         countries.append("spain")
         countries.append("uk")
         countries.append("us")
-        
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(0, forKey: "previousScore")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Check Score", style: .plain, target: self, action: #selector(checkScore))
         askQuestion()
     }
@@ -70,20 +71,36 @@ class ViewController: UIViewController {
     @IBAction func buttonTapped(_ sender: UIButton) {
         questionsAsked += 1
         var title : String
+        let userDefaults = UserDefaults.standard
         if(sender.tag == correctAnswer){
             title = "Correct";
             playerScore += 1
+            userDefaults.set(playerScore, forKey: "currentScore")
         }else{
             title = "Wrong. You chose \(countries[sender.tag])"
             playerScore -= 1
+            userDefaults.set(playerScore, forKey: "currentScore")
         }
         let ac = UIAlertController(title: title, message: "Your score is \(playerScore)", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         
-        let finalAlert = UIAlertController(title: "Game over", message: "Your final score is \(playerScore)", preferredStyle: .alert)
+        
         if(questionsAsked == 10){
+            let previousScore = userDefaults.integer(forKey: "previousScore")
+            let currentScore = userDefaults.integer(forKey: "currentScore")
+            let finalAlert = UIAlertController(title: "Game over", message: "Your final score is \(playerScore)", preferredStyle: .alert)
             finalAlert.addAction(UIAlertAction(title: "Start over", style: .default, handler: askQuestion))
-            present(finalAlert, animated: true)
+            if(currentScore > previousScore){
+                let highScoreAlert = UIAlertController(title: "You beat your previous score of \(previousScore)", message: nil, preferredStyle: .alert)
+                highScoreAlert.addAction(UIAlertAction(title: "Yay!", style: .default){
+                    [weak self] _ in
+                    self?.present(finalAlert, animated: true)
+                })
+                userDefaults.set(currentScore, forKey: "previousScore")
+                present(highScoreAlert, animated: true)
+            }else{
+                present(finalAlert, animated: true)
+            }
         }else{
             present(ac, animated: true)
         }
