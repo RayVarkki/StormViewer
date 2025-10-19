@@ -69,6 +69,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         return paths[0]
     }
     
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let person = people[indexPath.item]
         let ac = UIAlertController(title: "What would you like to do to this photo?", message: nil, preferredStyle: .alert)
