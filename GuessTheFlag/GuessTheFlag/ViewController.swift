@@ -69,6 +69,11 @@ class ViewController: UIViewController {
     }
 
     @IBAction func buttonTapped(_ sender: UIButton) {
+        
+        UIView.animate(withDuration: 0.5) {
+            sender.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            sender.transform = .identity
+        }
         questionsAsked += 1
         var title : String
         let userDefaults = UserDefaults.standard

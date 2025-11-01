@@ -143,8 +143,11 @@ class ViewController: UIViewController {
         guard let buttonTitle = sender.titleLabel?.text else { return }
         currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
         activatedButtons.append(sender)
-        sender.isHidden = true
-        
+        UIView.animate(withDuration: 0.25, delay: 0) {
+            sender.alpha = 0
+        } completion: { bool in
+            sender.isHidden = true
+        }
     }
 
     @objc func submitTapped(_ sender: UIButton){
@@ -191,6 +194,7 @@ class ViewController: UIViewController {
         
         currentAnswer.text = ""
         for button in activatedButtons{
+            button.alpha = 1
             button.isHidden = false
         }
         activatedButtons.removeAll()
@@ -201,7 +205,6 @@ class ViewController: UIViewController {
         var clueString = ""
         var solutionString = ""
         var letterBits = [String]()
-        
         DispatchQueue.global(qos: .userInitiated).async{
             [weak self] in
             if let levelFileUrl = Bundle.main.url(forResource: "level\(self?.level ?? 1)", withExtension: "txt"){
